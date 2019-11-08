@@ -1,8 +1,22 @@
 #!/usr/bin/python3
 """Console AirBnB"""
+from models.base_model import BaseModel
+from models.user import User
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
 
 import cmd
+#from models import storage
 from models.base_model import BaseModel
+
+xs = {'BaseModel': BaseModel, 'User': User,
+            'State': State, 'City': City, 'Amenity': Amenity,
+            'Place': Place, 'Review': Review}
+
+
 class HBNBCommand(cmd.Cmd):
 
     """Class for the command interpreter."""
@@ -22,11 +36,17 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, args):
         """Creates an instance"""
-        if args == "" or args is None:
-            print("** class name missing **")
-        elif args not in storage.classes():
-            print ("** class doesn't exist **")
-
+        if not args:
+            print('** class name missing **')
+        else:
+            arg = args.split()
+            if arg[0] in xs:
+                b = xs[arg[0]]()
+                print(b.id)
+                b.save()
+            else:
+                print("** class doesn't exist **")
+        
 #    def do_show(self, args):
         
 #    def do_destroy(self, args):
