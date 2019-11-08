@@ -19,5 +19,21 @@ class HBNBCommand(cmd.Cmd):
         """Quit command to exit the program at end of file"""
         return True
 
+    def create(self, *args):
+        """Creates an instance"""
+         if not args[0]:
+            print("** class name missing **")
+            return
+        
+
+    def show(self):
+
+    def destroy(self):
+
+    def all(self):
+
+    def update(self):
+
+
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
