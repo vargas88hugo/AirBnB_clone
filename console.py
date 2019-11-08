@@ -2,6 +2,7 @@
 """Console AirBnB"""
 
 import cmd
+from models.base_model import BaseModel
 class HBNBCommand(cmd.Cmd):
 
     """Class for the command interpreter."""
@@ -11,28 +12,28 @@ class HBNBCommand(cmd.Cmd):
         """Ignores empty spaces"""
         pass
 
-    def do_quit(self, line):
+    def do_quit(self, args):
         """Quit command to exit the program"""
         return True
 
-    def do_EOF(self, line):
+    def do_EOF(self, args):
         """Quit command to exit the program at end of file"""
         return True
 
-    def create(self, *args):
+    def do_create(self, args):
         """Creates an instance"""
-         if not args[0]:
+        if args == "" or args is None:
             print("** class name missing **")
-            return
+        elif args not in storage.classes():
+            print ("** class doesn't exist **")
+
+#    def do_show(self, args):
         
+#    def do_destroy(self, args):
 
-    def show(self):
+#    def do_all(self, args):
 
-    def destroy(self):
-
-    def all(self):
-
-    def update(self):
+#    def do_update(self, args):
 
 
 if __name__ == '__main__':
