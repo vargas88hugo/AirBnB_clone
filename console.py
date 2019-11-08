@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """Console AirBnB"""
+import models
 from models.base_model import BaseModel
 from models.user import User
 from models.state import State
@@ -9,7 +10,6 @@ from models.place import Place
 from models.review import Review
 
 import cmd
-#from models import storage
 from models.base_model import BaseModel
 
 xs = {'BaseModel': BaseModel, 'User': User,
@@ -46,9 +46,24 @@ class HBNBCommand(cmd.Cmd):
                 b.save()
             else:
                 print("** class doesn't exist **")
-        
-#    def do_show(self, args):
-        
+
+    def do_show(self, args):
+        '''Print the object with id specified and his dictionary'''
+        arg = args.split()
+        if not args:
+            print('** class name missing **')
+        else:
+            if arg[0] not in xs:
+                print("** class doesn't exist **")
+            if len(arg) < 2:
+                print("** instance id missing **")
+            objects = models.storage.all()
+            key = arg[0] + '.' + arg[1]
+            if key not in objects:
+                print("** no instance found **")
+            else:
+                print (objects[key])
+
 #    def do_destroy(self, args):
 
 #    def do_all(self, args):
