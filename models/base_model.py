@@ -19,6 +19,8 @@ class BaseModel:
             for key, value in kwargs.items():
                 if key == 'created_at' or key == 'updated_at':
                     setattr(self, key, datetime.strptime(value, format))
+                elif key == '__class__':
+                    pass
                 else:
                     setattr(self, key, value)
         else:
@@ -44,5 +46,6 @@ class BaseModel:
         dic2 = self.__dict__.copy()
         dic2["created_at"] = dic2["created_at"].isoformat()
         dic2["updated_at"] = dic2["updated_at"].isoformat()
+        dic2["__class__"] = str(self.__class__.__name__)
 
         return dic2
