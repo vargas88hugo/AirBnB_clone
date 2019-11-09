@@ -72,7 +72,17 @@ class HBNBCommand(cmd.Cmd):
         pass
 
     def do_all(self, args):
-        pass
+        if args:
+            s = ""
+            for i in args:
+                s += i
+            data = s.split()
+            if data[0] != "BaseModel":
+                print("** class doesn't exist **")
+                return
+        all_objs = storage.all()
+        all_objs = [str(j) for j in all_objs.values()]
+        print(all_objs)
 
     def do_update(self, args):
         pass
