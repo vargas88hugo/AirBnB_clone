@@ -5,6 +5,7 @@ Unittest for base module
 import io
 import unittest
 import unittest.mock
+from models import storage
 from models.base_model import BaseModel
 
 
@@ -15,6 +16,7 @@ class Test_Base(unittest.TestCase):
         pass
 
     def test_base_01(self):
+        """ test of the task 03 """
         my_model = BaseModel()
         my_model.name = "Holberton"
         my_model.my_number = 89
@@ -30,6 +32,7 @@ class Test_Base(unittest.TestCase):
         self.assertEqual(str(dic["__class__"]), "BaseModel")
 
     def test_base_02(self):
+        """ test of the task 04 """
         my_model = BaseModel()
         my_model.name = "Holberton"
         my_model.my_number = 89
@@ -43,3 +46,7 @@ class Test_Base(unittest.TestCase):
         self.assertEqual(my_model.my_number, my_new_model.my_number)
         self.assertEqual(my_model.__class__, my_new_model.__class__)
         self.assertNotEqual(my_model, my_new_model)
+
+    def test_base_03(self):
+        """ test of the task 05 """
+        all_objs = storage.all()
