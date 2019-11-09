@@ -19,9 +19,9 @@ class FileStorage:
 
     def save(self):
         with open(FileStorage.__file_path, "w", encoding="utf-8") as fp:
-            FileStorage.__objects = {i: j.to_dict() for i,
-                                     j in FileStorage.__objects.items()}
-            json.dump(FileStorage.__objects, fp)
+            d = {i: j.to_dict() for i,
+                 j in FileStorage.__objects.items()}
+            json.dump(d, fp)
 
     def reload(self):
         from models.base_model import BaseModel

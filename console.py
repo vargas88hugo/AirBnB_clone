@@ -38,12 +38,12 @@ class HBNBCommand(cmd.Cmd):
             s = ""
             for i in args:
                 s += i
-            if s == "BaseModel":
+            if s != "BaseModel":
+                print("* class doesn't exist **")
+            else:
                 obj = BaseModel()
                 obj.save()
                 print(obj.id)
-            else:
-                print("* class doesn't exist **")
 
     def do_show(self, args):
         '''Print the object with id specified and his dictionary'''
@@ -63,13 +63,33 @@ class HBNBCommand(cmd.Cmd):
                     print("** no instance found **")
                 else:
                     for i, j in all_objs.items():
-                        if i.split(".")[1] != data[1]:
-                            print("** no instance found **")
-                        else:
+                        if i.split(".")[1] == data[1]:
                             print(j)
+                            return
+                    print("** no instance found **")
 
     def do_destroy(self, args):
-        pass
+        arg = args.split()
+        if not args:
+            print('** class name missing **')
+        else:
+            s = ""
+            for i in args:
+                s += i
+            data = s.split()
+            if data[0] != "BaseModel":
+                print("** class doesn't exist **")
+            else:
+                all_objs = storage.all()
+                if len(data) < 2:
+                    print("** no instance found **")
+                else:
+                    for i, j in all_objs.items():
+                        if i.split(".")[1] == data[1]:
+                            del storage.all()[i]
+                            storage.save()
+                            return
+                    print("** no instance found **")
 
     def do_all(self, args):
         if args:
