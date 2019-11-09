@@ -9,12 +9,7 @@ from models.city import City
 from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
-
 import cmd
-
-xs = {'BaseModel': BaseModel, 'User': User,
-            'State': State, 'City': City, 'Amenity': Amenity,
-            'Place': Place, 'Review': Review}
 
 
 class HBNBCommand(cmd.Cmd):
@@ -22,6 +17,7 @@ class HBNBCommand(cmd.Cmd):
     """Class for the command interpreter."""
 
     prompt = "(hbnb) "
+
     def emptyline(self):
         """Ignores empty spaces"""
         pass
@@ -80,6 +76,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_update(self, args):
         pass
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
