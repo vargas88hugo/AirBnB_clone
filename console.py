@@ -2,6 +2,7 @@
 """Console AirBnB"""
 import models
 from models.base_model import BaseModel
+from models import storage
 from models.user import User
 from models.state import State
 from models.city import City
@@ -10,7 +11,6 @@ from models.place import Place
 from models.review import Review
 
 import cmd
-from models.base_model import BaseModel
 
 xs = {'BaseModel': BaseModel, 'User': User,
             'State': State, 'City': City, 'Amenity': Amenity,
@@ -39,13 +39,15 @@ class HBNBCommand(cmd.Cmd):
         if not args:
             print('** class name missing **')
         else:
-            arg = args.split()
-            if arg[0] in xs:
-                b = xs[arg[0]]()
-                print(b.id)
-                b.save()
+            s = ""
+            for i in args:
+                s += i
+            if s == "BaseModel":
+                obj = BaseModel()
+                obj.save()
+                print(obj.id)
             else:
-                print("** class doesn't exist **")
+                print("* class doesn't exist **")
 
     def do_show(self, args):
         '''Print the object with id specified and his dictionary'''
@@ -53,23 +55,31 @@ class HBNBCommand(cmd.Cmd):
         if not args:
             print('** class name missing **')
         else:
-            if arg[0] not in xs:
+            s = ""
+            for i in args:
+                s += i
+            data = s.split()
+            if data[0] != "BaseModel":
                 print("** class doesn't exist **")
-            if len(arg) < 2:
-                print("** instance id missing **")
-            objects = models.storage.all()
-            key = arg[0] + '.' + arg[1]
-            if key not in objects:
-                print("** no instance found **")
             else:
-                print (objects[key])
+                all_objs = storage.all()
+                if len(data) < 2:
+                    print("** no instance found **")
+                else:
+                    for i, j in all_objs.items():
+                        if i.split(".")[1] != data[1]:
+                            print("** no instance found **")
+                        else:
+                            print(j)
 
-#    def do_destroy(self, args):
+    def do_destroy(self, args):
+        pass
 
-#    def do_all(self, args):
+    def do_all(self, args):
+        pass
 
-#    def do_update(self, args):
-
+    def do_update(self, args):
+        pass
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
