@@ -13,7 +13,7 @@ All our files are interpreted/compiled on Ubuntu 14.04 LTS using python3 (versio
 
 ### On any terminal:
 
-Mode Interactive
+#### Mode Interactive
 
 <pre><code>$ ./console.py
 (hbnb) help
@@ -27,7 +27,7 @@ EOF  help  quit
 (hbnb) quit
 $</code></pre>
 
-Mode Non-Interactive
+#### Mode Non-Interactive
 
 <pre><code>$ echo "help" | ./console.py
 (hbnb)
