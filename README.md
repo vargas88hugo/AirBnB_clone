@@ -72,6 +72,8 @@ The following commands are available in the console, the main class is BaseModel
 </ul>
 
 ### Example :mag_right:
+
+Testing on interactive mode:
 <code><pre>(hbnb) all MyModel
 ** class doesn't exist **
 (hbnb) show BaseModel
