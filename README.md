@@ -71,10 +71,9 @@ The following commands are available in the console, the main class is BaseModel
   </li>
 </ul>
 
-### Example :mag_right:
+### Example
 
-Testing on interactive mode:
-<code><pre>(hbnb) all MyModel
+<pre><code>(hbnb) all MyModel
 ** class doesn't exist **
 (hbnb) show BaseModel
 ** instance id missing **
@@ -98,8 +97,7 @@ Testing on interactive mode:
 (hbnb) destroy BaseModel 49faff9a-6318-451f-87b6-910505c55907
 (hbnb) show BaseModel 49faff9a-6318-451f-87b6-910505c55907
 ** no instance found **
-(hbnb) </code></pre>
-
+(hbnb) </pre></code>
 
 ## Running the tests ⚙️
 All our tests are executed by using this command in the root directory of the project: <code>python3 -m unittest discover tests</code>
