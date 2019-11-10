@@ -38,10 +38,25 @@ class HBNBCommand(cmd.Cmd):
             s = ""
             for i in args:
                 s += i
-            if s != "BaseModel":
+            if s != "BaseModel" and s != "User" and s != "State" and \
+               s != "City" and s != "Amenity" and s != "Place" and \
+               s != "Review":
                 print("* class doesn't exist **")
             else:
-                obj = BaseModel()
+                if s == "BaseModel":
+                    obj = BaseModel()
+                elif s == "User":
+                    obj = User()
+                elif s == "State":
+                    obj = State()
+                elif s == "City":
+                    obj = City()
+                elif s == "Amenity":
+                    obj = Amenity()
+                elif s == "Place":
+                    obj = Place()
+                else:
+                    obj = Review()
                 obj.save()
                 print(obj.id)
 
