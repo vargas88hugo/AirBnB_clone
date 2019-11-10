@@ -30,5 +30,5 @@ class FileStorage:
                 data = json.load(fp)
                 self.__objects = {i: BaseModel(**j) for i,
                                   j in data.items()}
-        except Excepotion:
+        except Exception:
             pass
