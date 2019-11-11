@@ -85,7 +85,7 @@ class HBNBCommand(cmd.Cmd):
                 if len(data) < 2:
                     print("** instance id missing **")
                 else:
-                    if ( + "." + str(data[1])) in all_objs:
+                    if (str(data[0]) + "." + str(data[1])) in all_objs:
                         del storage.all()[str(data[0]) + "." + str(data[1])]
                         storage.save()
                     else:
