@@ -35,28 +35,13 @@ class HBNBCommand(cmd.Cmd):
         if not args:
             print('** class name missing **')
         else:
-            s = ""
-            for i in args:
-                s += i
-            if s != "BaseModel" and s != "User" and s != "State" and \
-               s != "City" and s != "Amenity" and s != "Place" and \
-               s != "Review":
+            data = args.split()
+            if data[0] != "BaseModel" and data[0] != "User" and data[0] != "State" and \
+               data[0] != "City" and data[0] != "Amenity" and data[0] != "Place" and \
+               data[0] != "Review":
                 print("* class doesn't exist **")
             else:
-                if s == "BaseModel":
-                    obj = BaseModel()
-                elif s == "User":
-                    obj = User()
-                elif s == "State":
-                    obj = State()
-                elif s == "City":
-                    obj = City()
-                elif s == "Amenity":
-                    obj = Amenity()
-                elif s == "Place":
-                    obj = Place()
-                else:
-                    obj = Review()
+                obj = eval("{}()".format(data[0]))
                 obj.save()
                 print(obj.id)
 
@@ -69,7 +54,9 @@ class HBNBCommand(cmd.Cmd):
             for i in args:
                 s += i
             data = s.split()
-            if data[0] != "BaseModel":
+            if data[0] != "BaseModel" and data[0] != "User" and data[0] != "State" and \
+               data[0] != "City" and data[0] != "Amenity" and data[0] != "Place" and \
+               data[0] != "Review":
                 print("** class doesn't exist **")
             else:
                 all_objs = storage.all()
@@ -89,14 +76,16 @@ class HBNBCommand(cmd.Cmd):
             for i in args:
                 s += i
             data = s.split()
-            if data[0] != "BaseModel":
+            if data[0] != "BaseModel" and data[0] != "User" and data[0] != "State" and \
+               data[0] != "City" and data[0] != "Amenity" and data[0] != "Place" and \
+               data[0] != "Review":
                 print("** class doesn't exist **")
             else:
                 all_objs = storage.all()
                 if len(data) < 2:
                     print("** instance id missing **")
                 else:
-                    if (str(data[0]) + "." + str(data[1])) in all_objs:
+                    if ( + "." + str(data[1])) in all_objs:
                         del storage.all()[str(data[0]) + "." + str(data[1])]
                         storage.save()
                     else:
@@ -108,7 +97,9 @@ class HBNBCommand(cmd.Cmd):
             for i in args:
                 s += i
             data = s.split()
-            if data[0] != "BaseModel":
+            if data[0] != "BaseModel" and data[0] != "User" and data[0] != "State" and \
+               data[0] != "City" and data[0] != "Amenity" and data[0] != "Place" and \
+               data[0] != "Review":
                 print("** class doesn't exist **")
                 return
         all_objs = storage.all()
@@ -123,7 +114,9 @@ class HBNBCommand(cmd.Cmd):
             for i in args:
                 s += i
             data = s.split()
-            if data[0] != "BaseModel":
+            if data[0] != "BaseModel" and data[0] != "User" and data[0] != "State" and \
+               data[0] != "City" and data[0] != "Amenity" and data[0] != "Place" and \
+               data[0] != "Review":
                 print("** class doesn't exist **")
             else:
                 all_objs = storage.all()
