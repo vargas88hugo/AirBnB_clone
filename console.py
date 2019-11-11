@@ -18,6 +18,27 @@ class HBNBCommand(cmd.Cmd):
 
     prompt = "(hbnb) "
 
+    def default(self, args):
+        """Method when the command is not recognized"""
+        data = args.split('.')
+        if len(data) >= 2:
+            if data[1][:3] == "all":
+                self.do_all(data[0])
+            elif data[1][:5] == "count":
+                self.count(data[0])
+            elif data[1][:4] == "show":
+                self.do_show((data))
+            elif data[1][:7] == "destroy":
+                self.do_destroy((data))
+            elif data[1][:6] == "update":
+                self.do_destroy((data))
+        else:
+            cmd.Cmd.default(self, args)
+
+    def count(self, line):
+        """count # of instances of a class"""
+        pass
+
     def emptyline(self):
         """Ignores empty spaces"""
         pass
