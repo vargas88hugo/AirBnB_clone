@@ -11,7 +11,9 @@ class TestCity(unittest.TestCase):
 
     def setUp(self):
         """Sets up test methods."""
-        pass
+        self.city = City()
+        self.city.name = "Bogota"
+        self.city.save()
 
     def test_docstring_City(self):
         """checking docstrings"""
@@ -22,7 +24,7 @@ class TestCity(unittest.TestCase):
         self.assertTrue('id' in self.city.__dict__)
         self.assertTrue('created_at' in self.city.__dict__)
         self.assertTrue('updated_at' in self.city.__dict__)
-        self.assertTrue('state_id' in self.city.__dict__)
+        self.assertTrue('id' in self.city.__dict__)
         self.assertTrue('name' in self.city.__dict__)
 
     def test_subclass_City(self):

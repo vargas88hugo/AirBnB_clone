@@ -1,4 +1,4 @@
-!/usr/bin/python3
+#!/usr/bin/python3
 """test for amenity"""
 import unittest
 import os
@@ -11,7 +11,9 @@ class TestAmenity(unittest.TestCase):
 
     def setUp(self):
         """Sets up test methods."""
-        pass
+        self.amenity = Amenity()
+        self.amenity.name = "Whatever"
+        self.amenity.save()
 
     def test_docstring_Amenity(self):
         """checking for docstrings"""

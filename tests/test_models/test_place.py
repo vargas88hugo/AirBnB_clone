@@ -11,7 +11,19 @@ class TestPlace(unittest.TestCase):
 
     def setUp(self):
         """Sets up test methods."""
-        pass
+        self.place = Place()
+        self.place.city_id = "1111"
+        self.place.user_id = "2222"
+        self.place.name = "Holberton"
+        self.place.description = "Whatever"
+        self.place.number_rooms = 2
+        self.place.number_bathrooms = 1
+        self.place.max_guest = 4
+        self.place.price_by_night = 400
+        self.place.latitude = 1000.0
+        self.place.longitude = 2000.0
+        self.place.amenity_ids = ["Whatever"]
+        self.place.save()
 
     def test_docstring_Place(self):
         """checking for docstrings"""

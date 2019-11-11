@@ -10,7 +10,9 @@ class TestState(unittest.TestCase):
     """test the State class"""
     def setUp(self):
         """Sets up test methods."""
-        pass
+        self.state = State()
+        self.state.name = "Cundinamarca"
+        self.state.save()
 
     def test_docstring_State(self):
         """checking for docstrings"""

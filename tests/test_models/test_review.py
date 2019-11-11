@@ -11,7 +11,11 @@ class TestReview(unittest.TestCase):
 
     def setUp(self):
         """Sets up test methods."""
-        pass
+        self.rev = Review()
+        self.rev.place_id = "1111"
+        self.rev.user_id = "2222"
+        self.rev.text = "3333"
+        self.rev.save()
 
     def test_docstring_Review(self):
         """checking for docstrings"""

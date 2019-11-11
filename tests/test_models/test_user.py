@@ -11,7 +11,12 @@ class TestUser(unittest.TestCase):
 
     def setUp(self):
         """Sets up test methods."""
-        pass
+        self.user = User()
+        self.user.first_name = "Betty"
+        self.user.last_name = "Holberton"
+        self.user.email = "airbnb@holbertonshool.com"
+        self.user.password = "root"
+        self.user.save()
 
     def test_docstring_User(self):
         """checking for docstrings"""
