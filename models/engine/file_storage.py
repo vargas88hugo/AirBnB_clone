@@ -25,10 +25,29 @@ class FileStorage:
 
     def reload(self):
         from models.base_model import BaseModel
+        from models.user import User
+        from models.state import State
+        from models.city import City
+        from models.amenity import Amenity
+        from models.place import Place
+        from models.review import Review
         try:
             with open(FileStorage.__file_path) as fp:
                 data = json.load(fp)
-                self.__objects = {i: BaseModel(**j) for i,
-                                  j in data.items()}
+                for i, j in data.items():
+                    if "BaseModel" in i:
+                        self.__objects[i] = BaseModel(**j)
+                    elif "User" in i:
+                        self.__objects[i] = User(**j)
+                    elif "State" in i:
+                        self.__objects[i] = State(**j)
+                    elif "City" in i:
+                        self.__objects[i] = City(**j)
+                    elif "Amenity" in i:
+                        self.__objects[i] = Amenity(**j)
+                    elif "Place" in i:
+                        self.__objects[i] = Place(**j)
+                    elif "Review" in i:
+                        self.__objects[i] = Review(**j)
         except Exception:
             pass
