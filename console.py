@@ -34,7 +34,7 @@ class HBNBCommand(cmd.Cmd):
                 self.do_count(data[0])
             elif data[1][:4] == "show":
                 aux = data[1].split('(')
-                self.do_show(data[0] + ' ' +aux[1])
+                self.do_show(data[0] + ' ' +aux[1][:-1])
             elif data[1][:7] == "destroy":
                 self.do_destroy((data))
             elif data[1][:6] == "update":
