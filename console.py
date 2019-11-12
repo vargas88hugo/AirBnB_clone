@@ -34,11 +34,16 @@ class HBNBCommand(cmd.Cmd):
                 self.do_count(data[0])
             elif data[1][:4] == "show":
                 aux = data[1].split('(')
-                self.do_show(data[0] + ' ' +aux[1][:-1])
+                self.do_show(data[0] + ' ' + aux[1][1:-2])
             elif data[1][:7] == "destroy":
-                self.do_destroy((data))
+                aux = data[1].split('(')
+                self.do_destroy(data[0] + ' ' + aux[1][1:-2])
             elif data[1][:6] == "update":
-                self.do_destroy((data))
+                aux = data[1].split('(')
+                key = aux[1].split(',')
+                print(key[1][2:-1])
+                print(key[2][2:-2])
+                self.do_update(data[0] + ' ' + aux[1][1:-2] + ', ' +key[1][1:-1]+', '+key[2][1:-2])
         else:
             cmd.Cmd.default(self, args)
 
