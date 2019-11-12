@@ -10,7 +10,13 @@ from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
 import cmd
-
+classes = {"BaseModel": BaseModel,
+           "User": User,
+           "State": State,
+           "City": City,
+           "Amenity": Amenity,
+           "Place": Place,
+           "Review": Review}
 
 class HBNBCommand(cmd.Cmd):
 
@@ -25,7 +31,7 @@ class HBNBCommand(cmd.Cmd):
             if data[1][:3] == "all":
                 self.do_all(data[0])
             elif data[1][:5] == "count":
-                self.count(data[0])
+                self.do_count(data[0])
             elif data[1][:4] == "show":
                 self.do_show((data))
             elif data[1][:7] == "destroy":
@@ -35,9 +41,23 @@ class HBNBCommand(cmd.Cmd):
         else:
             cmd.Cmd.default(self, args)
 
-    def count(self, line):
+    def do_count(self, args):
         """count # of instances of a class"""
-        pass
+        if not args:
+            print('** class name missing **')
+        else:
+            count = 0
+            objects = models.storage.all()
+            data = args.split()
+            if not data[0]:
+                print("** class name missing **")
+            elif data[0] not in classes:
+                print("** class doesn't exist **")
+            else:
+                for i in objects:
+                    if i.startswith(data[0] + '.'):
+                        m = [i]
+                print(len(m))
 
     def emptyline(self):
         """Ignores empty spaces"""
