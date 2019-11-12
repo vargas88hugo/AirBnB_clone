@@ -43,7 +43,7 @@ class HBNBCommand(cmd.Cmd):
                 key = aux[1].split(',')
                 print(key[1][2:-1])
                 print(key[2][2:-2])
-                self.do_update(data[0] + ' ' + aux[1][1:-2] + ', ' +key[1][1:-1]+', '+key[2][1:-2])
+                self.do_update(data[0] + ' ' + aux[1][1:-2] + ' ' +key[1][1:-1]+':'+key[2][1:-2])
         else:
             cmd.Cmd.default(self, args)
 
