@@ -18,8 +18,8 @@ classes = {"BaseModel": BaseModel,
            "Place": Place,
            "Review": Review}
 
-class HBNBCommand(cmd.Cmd):
 
+class HBNBCommand(cmd.Cmd):
     """Class for the command interpreter."""
 
     prompt = "(hbnb) "
@@ -43,7 +43,8 @@ class HBNBCommand(cmd.Cmd):
                 key = aux[1].split(',')
                 print(key[1][2:-1])
                 print(key[2][2:-2])
-                self.do_update(data[0] + ' ' + aux[1][1:-2] + ' ' +key[1][1:-1]+':'+key[2][1:-2])
+                self.do_update(data[0] + ' ' + aux[1][1:-2] + ' '
+                               + key[1][1:-1] + ':'+key[2][1:-2])
         else:
             cmd.Cmd.default(self, args)
 
@@ -75,6 +76,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_EOF(self, args):
         """Quit command to exit the program at end of file"""
+        print()
         return True
 
     def do_create(self, args):
@@ -122,8 +124,8 @@ class HBNBCommand(cmd.Cmd):
                 if len(data) < 2:
                     print("** instance id missing **")
                 else:
-                    if (str(data[0]) + "." + str(data[1])) in all_objs:
-                        print(storage.all()[str(data[0]) + "." + str(data[1])])
+                    if (data[0] + "." + data[1]) in all_objs:
+                        print(storage.all()[data[0] + "." + data[1]])
                     else:
                         print("** no instance found **")
 
@@ -142,8 +144,8 @@ class HBNBCommand(cmd.Cmd):
                 if len(data) < 2:
                     print("** instance id missing **")
                 else:
-                    if (str(data[0]) + "." + str(data[1])) in all_objs:
-                        del storage.all()[str(data[0]) + "." + str(data[1])]
+                    if (data[0] + "." + data[1]) in all_objs:
+                        del storage.all()[data[0] + "." + data[1]]
                         storage.save()
                     else:
                         print("** no instance found **")
@@ -179,19 +181,23 @@ class HBNBCommand(cmd.Cmd):
             if data[0] not in classes:
                 print("** class doesn't exist **")
             else:
-                all_objs = storage.all()
                 if len(data) < 2:
                     print("** instance id missing **")
                 else:
-                    if (str(data[0]) + "." + str(data[1])) in all_objs:
+                    all_objs = storage.all()
+                    if (data[0] + "." + data[1]) in all_objs:
                         if len(data) < 3:
                             print("** attribute name missing **")
                         else:
                             if len(data) < 4:
                                 print("** value missing **")
                             else:
-                                setattr(storage.all()[str(data[0]) +
-                                        "." + str(data[1])], data[2], data[3])
+                                if '"' in data[3]:
+                                    setattr(storage.all()[data[0] +
+                                            "." + data[1]], data[2],
+                                            data[3].replace('"', ''))
+                                    storage.all()[data[0] +
+                                                  "." + data[1]].save()
                     else:
                         print("** no instance found **")
 
