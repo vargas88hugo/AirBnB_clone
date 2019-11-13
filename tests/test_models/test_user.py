@@ -37,6 +37,7 @@ class TestUser(unittest.TestCase):
     def test_is_subclass_User(self):
         """test if User is subclass of Basemodel"""
         self.assertTrue(issubclass(self.user.__class__, BaseModel), True)
+        self.assertIsInstance(self.user, User)
 
     def test_attribute_types_User(self):
         """test attribute type for User"""
@@ -44,6 +45,7 @@ class TestUser(unittest.TestCase):
         self.assertEqual(type(self.user.password), str)
         self.assertEqual(type(self.user.first_name), str)
         self.assertEqual(type(self.user.first_name), str)
+        self.assertNotEqual(hasattr(self.user, "name"), True)
 
     def test_save_User(self):
         """test if the save works"""

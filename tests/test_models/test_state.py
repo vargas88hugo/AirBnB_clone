@@ -30,10 +30,12 @@ class TestState(unittest.TestCase):
     def test_is_subclass_State(self):
         """test if State is subclass of BaseModel"""
         self.assertTrue(issubclass(self.state.__class__, BaseModel), True)
+        self.assertIsInstance(self.state, State)
 
     def test_attribute_types_State(self):
         """test attribute type for State"""
         self.assertEqual(type(self.state.name), str)
+        self.assertEqual(hasattr(self.state, "name"), True)
 
     def test_save_State(self):
         """test if the save works"""

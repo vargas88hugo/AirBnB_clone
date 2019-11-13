@@ -28,10 +28,12 @@ class TestCity(unittest.TestCase):
         self.assertTrue('updated_at' in self.city.__dict__)
         self.assertTrue('id' in self.city.__dict__)
         self.assertTrue('name' in self.city.__dict__)
+        self.assertEqual(hasattr(self.city, "name"), True)
 
     def test_subclass_City(self):
         """test if City is subclass of Basemodel"""
         self.assertTrue(issubclass(self.city.__class__, BaseModel), True)
+        self.assertIsInstance(self.city, City)
 
     def test_type_City(self):
         """test attribute type for City"""

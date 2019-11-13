@@ -51,6 +51,7 @@ class TestPlace(unittest.TestCase):
     def test_is_subclass_Place(self):
         """test if Place is subclass of Basemodel"""
         self.assertTrue(issubclass(self.place.__class__, BaseModel), True)
+        self.assertIsInstance(self.place, Place)
 
     def test_type_Place(self):
         """test attribute type for Place"""
@@ -65,6 +66,7 @@ class TestPlace(unittest.TestCase):
         self.assertEqual(type(self.place.latitude), float)
         self.assertEqual(type(self.place.longitude), float)
         self.assertEqual(type(self.place.amenity_ids), list)
+        self.assertNotEqual(self.place.created_at, self.place.updated_at)
 
     def test_save_Place(self):
         """test if the save works"""

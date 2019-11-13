@@ -27,10 +27,12 @@ class TestAmenity(unittest.TestCase):
         self.assertTrue('created_at' in self.amenity.__dict__)
         self.assertTrue('updated_at' in self.amenity.__dict__)
         self.assertTrue('name' in self.amenity.__dict__)
+        self.assertEqual(hasattr(self.amenity, "name"), True)
 
     def test_subclass_Amenity(self):
         """test if Amenity is subclass of Basemodel"""
         self.assertTrue(issubclass(self.amenity.__class__, BaseModel), True)
+        self.assertIsInstance(self.amenity, Amenity)
 
     def test_type_Amenity(self):
         """test attribute type for Amenity"""
