@@ -14,16 +14,19 @@ class FileStorage:
         return self.__objects
 
     def new(self, obj):
+        """ method that adds a new object """
         key = obj.__class__.__name__ + "." + str(obj.id)
         self.__objects[key] = obj
 
     def save(self):
+        """ method that saves a new object """
         with open(FileStorage.__file_path, "w", encoding="utf-8") as fp:
             d = {i: j.to_dict() for i,
                  j in self.__objects.items()}
             json.dump(d, fp)
 
     def reload(self):
+        """ method that loads the objectos from de file """
         from models.base_model import BaseModel
         from models.user import User
         from models.state import State

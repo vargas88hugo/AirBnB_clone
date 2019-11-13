@@ -130,6 +130,7 @@ class HBNBCommand(cmd.Cmd):
                         print("** no instance found **")
 
     def do_destroy(self, args):
+        """ method that delete an object """
         if not args:
             print('** class name missing **')
         else:
@@ -151,6 +152,7 @@ class HBNBCommand(cmd.Cmd):
                         print("** no instance found **")
 
     def do_all(self, args):
+        """ method that prints all the objects """
         all_objs = storage.all()
         if args:
             s = ""
@@ -171,6 +173,7 @@ class HBNBCommand(cmd.Cmd):
             print(all_objs)
 
     def do_update(self, args):
+        """ method that updates an object """
         if not args:
             print('** class name missing **')
         else:
