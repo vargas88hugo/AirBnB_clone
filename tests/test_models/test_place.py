@@ -4,6 +4,7 @@ import unittest
 import os
 from models.place import Place
 from models.base_model import BaseModel
+from models.engine.file_storage import FileStorage
 
 
 class TestPlace(unittest.TestCase):
@@ -11,6 +12,7 @@ class TestPlace(unittest.TestCase):
 
     def setUp(self):
         """Sets up test methods."""
+        FileStorage._FileStorage__file_path = "test_json"
         self.place = Place()
         self.place.city_id = "1111"
         self.place.user_id = "2222"
@@ -72,6 +74,9 @@ class TestPlace(unittest.TestCase):
     def test_to_dict_Place(self):
         """test if dictionary works"""
         self.assertEqual('to_dict' in dir(self.place), True)
+
+    def tearDown(self):
+        os.remove(FileStorage._FileStorage__file_path)
 
 
 if __name__ == "__main__":

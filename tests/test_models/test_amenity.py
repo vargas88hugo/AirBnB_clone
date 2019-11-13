@@ -4,6 +4,7 @@ import unittest
 import os
 from models.amenity import Amenity
 from models.base_model import BaseModel
+from models.engine.file_storage import FileStorage
 
 
 class TestAmenity(unittest.TestCase):
@@ -11,6 +12,7 @@ class TestAmenity(unittest.TestCase):
 
     def setUp(self):
         """Sets up test methods."""
+        FileStorage._FileStorage__file_path = "test_json"
         self.amenity = Amenity()
         self.amenity.name = "Whatever"
         self.amenity.save()
@@ -42,6 +44,9 @@ class TestAmenity(unittest.TestCase):
     def test_to_dict_Amenity(self):
         """test if dictionary works"""
         self.assertEqual('to_dict' in dir(self.amenity), True)
+
+    def tearDown(self):
+        os.remove(FileStorage._FileStorage__file_path)
 
 
 if __name__ == "__main__":

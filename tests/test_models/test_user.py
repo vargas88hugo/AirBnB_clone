@@ -4,6 +4,7 @@ import unittest
 import os
 from models.user import User
 from models.base_model import BaseModel
+from models.engine.file_storage import FileStorage
 
 
 class TestUser(unittest.TestCase):
@@ -11,6 +12,7 @@ class TestUser(unittest.TestCase):
 
     def setUp(self):
         """Sets up test methods."""
+        FileStorage._FileStorage__file_path = "test_json"
         self.user = User()
         self.user.first_name = "Betty"
         self.user.last_name = "Holberton"
@@ -51,6 +53,9 @@ class TestUser(unittest.TestCase):
     def test_to_dict_User(self):
         """test if dictionary works"""
         self.assertEqual('to_dict' in dir(self.user), True)
+
+    def tearDown(self):
+        os.remove(FileStorage._FileStorage__file_path)
 
 
 if __name__ == "__main__":

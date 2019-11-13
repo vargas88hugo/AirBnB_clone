@@ -4,6 +4,7 @@ import unittest
 import os
 from models.review import Review
 from models.base_model import BaseModel
+from models.engine.file_storage import FileStorage
 
 
 class TestReview(unittest.TestCase):
@@ -11,6 +12,7 @@ class TestReview(unittest.TestCase):
 
     def setUp(self):
         """Sets up test methods."""
+        FileStorage._FileStorage__file_path = "test_json"
         self.rev = Review()
         self.rev.place_id = "1111"
         self.rev.user_id = "2222"
@@ -48,6 +50,9 @@ class TestReview(unittest.TestCase):
     def test_to_dict_Review(self):
         """test if dictionary works"""
         self.assertEqual('to_dict' in dir(self.rev), True)
+
+    def tearDown(self):
+        os.remove(FileStorage._FileStorage__file_path)
 
 
 if __name__ == "__main__":

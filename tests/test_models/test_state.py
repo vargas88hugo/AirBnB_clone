@@ -4,12 +4,14 @@ import unittest
 import os
 from models.state import State
 from models.base_model import BaseModel
+from models.engine.file_storage import FileStorage
 
 
 class TestState(unittest.TestCase):
     """test the State class"""
     def setUp(self):
         """Sets up test methods."""
+        FileStorage._FileStorage__file_path = "test_json"
         self.state = State()
         self.state.name = "Cundinamarca"
         self.state.save()
@@ -41,6 +43,9 @@ class TestState(unittest.TestCase):
     def test_to_dict_State(self):
         """test if dictionary works"""
         self.assertEqual('to_dict' in dir(self.state), True)
+
+    def tearDown(self):
+        os.remove(FileStorage._FileStorage__file_path)
 
 
 if __name__ == "__main__":

@@ -17,48 +17,63 @@ class Test_Base(unittest.TestCase):
     """ Test for BaseModel Class """
 
     def setUp(self):
-        pass
+        FileStorage._FileStorage__file_path = "test_json"
+        self.my_model = BaseModel()
+        self.my_model.name = "Holberton"
+        self.my_model.my_number = 89
+        self.my_model2 = BaseModel()
+        self.my_model2.name = "Holberton"
+        self.my_model2.my_number = 89
+        self.my_model.save()
+        self.my_model2.save()
+        self.dic = self.my_model.to_dict()
+        self.my_new_model = BaseModel(**self.dic)
+        self.all_objs = storage.all()
 
     def test_base_01(self):
         """ test of the task 03 """
-        my_model = BaseModel()
-        my_model.name = "Holberton"
-        my_model.my_number = 89
-        dic = my_model.to_dict()
 
-        self.assertEqual(str(type(my_model)),
+        self.assertEqual(str(type(self.my_model)),
                          "<class 'models.base_model.BaseModel'>")
-        self.assertEqual(my_model.name, "Holberton")
-        self.assertEqual(my_model.my_number, 89)
-        self.assertEqual(my_model.name, "Holberton")
-        self.assertEqual(my_model.my_number, 89)
-        self.assertEqual(dic['name'], "Holberton")
-        self.assertEqual(dic['my_number'], 89)
-        self.assertEqual(dic["created_at"], my_model.created_at.isoformat())
-        self.assertEqual(dic["updated_at"], my_model.updated_at.isoformat())
-        self.assertEqual(str(type(dic)), "<class 'dict'>")
-        self.assertEqual(str(dic["__class__"]), "BaseModel")
-        self.assertIsInstance(my_model, BaseModel)
-        self.assertTrue(issubclass(type(my_model), BaseModel))
+        self.assertEqual(self.my_model.name, "Holberton")
+        self.assertEqual(self.my_model.my_number, 89)
+        self.assertEqual(self.my_model.name, "Holberton")
+        self.assertEqual(self.my_model.my_number, 89)
+        self.assertEqual(self.dic['name'], "Holberton")
+        self.assertEqual(self.dic['my_number'], 89)
+        self.assertEqual(self.dic["created_at"],
+                         self.my_model.created_at.isoformat())
+        self.assertEqual(self.dic["updated_at"],
+                         self.my_model.updated_at.isoformat())
+        self.assertEqual(type(self.dic['created_at']), str)
+        self.assertEqual(type(self.dic['updated_at']), str)
+        self.assertEqual(str(type(self.dic)), "<class 'dict'>")
+        self.assertEqual(str(self.dic["__class__"]), "BaseModel")
+        self.assertIsInstance(self.my_model, BaseModel)
+        self.assertTrue(issubclass(type(self.my_model), BaseModel))
+        self.assertIsNotNone(BaseModel.__init__.__doc__)
+        self.assertIsNotNone(BaseModel.save.__doc__)
+        self.assertIsNotNone(BaseModel.__str__.__doc__)
+        self.assertIsNotNone(BaseModel.to_dict.__doc__)
+        self.assertNotEqual(self.my_model.id, self.my_model2.id)
+        self.assertNotEqual(self.my_model.created_at,
+                            self.my_model2.created_at)
+        self.assertNotEqual(self.my_model.updated_at,
+                            self.my_model2.updated_at)
 
     def test_base_02(self):
         """ test of the task 04 """
-        FileStorage._FileStorage__file_path = "test_json"
-        my_model = BaseModel()
-        my_model.name = "Holberton"
-        my_model.my_number = 89
-        my_model_json = my_model.to_dict()
-        my_new_model = BaseModel(**my_model_json)
-
-        self.assertEqual(my_model.id, my_new_model.id)
-        self.assertEqual(my_model.updated_at, my_new_model.updated_at)
-        self.assertEqual(my_model.created_at, my_new_model.created_at)
-        self.assertEqual(my_model.name, "Holberton")
-        self.assertEqual(my_model.my_number, 89)
-        self.assertEqual(my_model.name, my_new_model.name)
-        self.assertEqual(my_model.my_number, my_new_model.my_number)
-        self.assertEqual(my_model.__class__, my_new_model.__class__)
-        self.assertNotEqual(my_model, my_new_model)
+        self.assertEqual(self.my_model.id, self.my_new_model.id)
+        self.assertEqual(self.my_model.updated_at,
+                         self.my_new_model.updated_at)
+        self.assertEqual(self.my_model.created_at,
+                         self.my_new_model.created_at)
+        self.assertEqual(self.my_model.name, "Holberton")
+        self.assertEqual(self.my_model.my_number, 89)
+        self.assertEqual(self.my_model.name, self.my_new_model.name)
+        self.assertEqual(self.my_model.my_number, self.my_new_model.my_number)
+        self.assertEqual(self.my_model.__class__, self.my_new_model.__class__)
+        self.assertNotEqual(self.my_model, self.my_new_model)
 
     def test_base_03(self):
         """ test of the task 04 """
@@ -75,23 +90,18 @@ class Test_Base(unittest.TestCase):
 
     def test_base_04(self):
         """ test of the task 05 """
-        FileStorage._FileStorage__file_path = "test.json"
-        my_model = BaseModel()
-        my_model.name = "Holberton"
-        my_model.my_number = 89
-        my_model.save()
-        all_objs = storage.all()
-        self.assertEqual(all_objs[my_model.__class__.__name__ + "." +
-                                  my_model.id].name, "Holberton")
-        self.assertEqual(all_objs[my_model.__class__.__name__ + "." +
-                                  my_model.id].my_number, 89)
-        self.assertEqual(all_objs[my_model.__class__.__name__ + "." +
-                                  my_model.id].id, my_model.id)
-        self.assertEqual(all_objs[my_model.__class__.__name__ + "." +
-                                  my_model.id].created_at, my_model.created_at)
-        self.assertEqual(all_objs[my_model.__class__.__name__ + "." +
-                                  my_model.id].updated_at, my_model.updated_at)
-        os.remove(FileStorage._FileStorage__file_path)
+        self.assertEqual(self.all_objs[self.my_model.__class__.__name__ + "." +
+                                       self.my_model.id].name, "Holberton")
+        self.assertEqual(self.all_objs[self.my_model.__class__.__name__ + "." +
+                                       self.my_model.id].my_number, 89)
+        self.assertEqual(self.all_objs[self.my_model.__class__.__name__ + "." +
+                                       self.my_model.id].id, self.my_model.id)
+        self.assertEqual(self.all_objs[self.my_model.__class__.__name__ + "." +
+                                       self.my_model.id].created_at,
+                         self.my_model.created_at)
+        self.assertEqual(self.all_objs[self.my_model.__class__.__name__ + "." +
+                                       self.my_model.id].updated_at,
+                         self.my_model.updated_at)
 
     def test_base_errors_01(self):
         with self.assertRaises(Exception) as e:
@@ -130,6 +140,9 @@ class Test_Base(unittest.TestCase):
 
         s = "'BaseModel' object has no attribute 'blabla'"
         self.assertTrue(s in str(e.exception))
+
+    def tearDown(self):
+        os.remove(FileStorage._FileStorage__file_path)
 
 
 if __name__ == "__main__":
