@@ -34,17 +34,24 @@ class HBNBCommand(cmd.Cmd):
                 self.do_count(data[0])
             elif data[1][:4] == "show":
                 aux = data[1].split('(')
-                self.do_show(data[0] + ' ' + aux[1][1:-2])
+                if len(aux) >= 2:
+                    self.do_show(data[0] + ' ' + aux[1][1:-2])
+                else:
+                    print("** no instance found **")
             elif data[1][:7] == "destroy":
                 aux = data[1].split('(')
-                self.do_destroy(data[0] + ' ' + aux[1][1:-2])
+                if len(aux) >= 2:
+                    self.do_destroy(data[0] + ' ' + aux[1][1:-2])
+                else:
+                    print("** no instance found **")
             elif data[1][:6] == "update":
                 aux = data[1].split('(')
-                key = aux[1].split(',')
-                print(key[1][2:-1])
-                print(key[2][2:-2])
-                self.do_update(data[0] + ' ' + aux[1][1:-2] + ' '
-                               + key[1][1:-1] + ':'+key[2][1:-2])
+                key = aux[1].split(' ')
+                if len(aux) >= 2 and len(key) >= 3:
+                    self.do_update(data[0] + ' ' + key[0] + ' '
+                                   + key[1] +' ' +key[2][:-1])
+                else:
+                    print("** no instance found **")
         else:
             cmd.Cmd.default(self, args)
 
@@ -53,7 +60,7 @@ class HBNBCommand(cmd.Cmd):
         if not args:
             print('** class name missing **')
         else:
-            count = 0
+            m =[]
             objects = models.storage.all()
             data = args.split()
             if not data[0]:
@@ -62,7 +69,7 @@ class HBNBCommand(cmd.Cmd):
                 print("** class doesn't exist **")
             else:
                 for i in objects:
-                    if i.startswith(data[0] + '.'):
+                    if i.startswith(data[0]):
                         m = [i]
                 print(len(m))
 
