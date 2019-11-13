@@ -54,16 +54,12 @@ class HBNBCommand(cmd.Cmd):
                         a = eval("{" + a + "}")
                         b = list(a.keys())
                         c = list(a.values())
-                        print(a)
                         if len(b) == 1:
                             self.do_update(data[0] + ' ' + key[0][1:-2] + ' ' +
                                            b[0] + ' ' + '"' + str(c[0]) + '"')
                         elif len(b) == 2:
                             self.do_update(data[0] + ' ' + key[0][1:-2] + ' ' +
                                            b[0] + ' ' + '"' + str(c[0]) + '"')
-                            self.do_update(data[0] + ' ' + key[0][1:-2] + ' ' +
-                                           b[1] + ' ' + '"' + str(c[1]) + '"')
-                            print("hola")
                     except Exception:
                         print(Exception.Exception)
                 elif len(aux) >= 2 and len(key) == 3:
@@ -71,8 +67,7 @@ class HBNBCommand(cmd.Cmd):
                                    key[1][1:-2] + ' ' + key[2][:-1])
                 elif len(key) > 3:
                     self.do_update(data[0] + ' ' + key[0][1:-2] + ' ' +
-                                   key[1][2:-2] + ' ' + key[2][:-1])
-                    self.do_update(data[0] + ' ' + key[0][1:-2] + ' ' +
+                                   key[1][2:-2] + ' ' + key[2][:-1] + ' ' +
                                    key[3][1:-2] + ' ' + '"' +
                                    key[4][1:-2] + '"')
                 else:
