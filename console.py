@@ -47,9 +47,14 @@ class HBNBCommand(cmd.Cmd):
             elif data[1][:6] == "update":
                 aux = data[1].split('(')
                 key = aux[1].split(' ')
-                if len(aux) >= 2 and len(key) >= 3:
+                if len(aux) >= 2 and len(key) == 3:
                     self.do_update(data[0] + ' ' + key[0][1:-2] + ' ' +
                                    key[1][1:-2] + ' ' + key[2][:-1])
+                elif len(key) > 3:
+                    self.do_update(data[0] + ' ' + key[0][1:-2] + ' ' +
+                                   key[1][2:-2] + ' ' + key[2][:-1])
+                    self.do_update(data[0] + ' ' + key[0][1:-2] + ' ' +
+                                   key[3][1:-2] + ' ' + '"' + key[4][1:-2] + '"')
                 else:
                     print("** no instance found **")
         else:
