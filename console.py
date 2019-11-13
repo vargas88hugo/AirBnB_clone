@@ -48,8 +48,8 @@ class HBNBCommand(cmd.Cmd):
                 aux = data[1].split('(')
                 key = aux[1].split(' ')
                 if len(aux) >= 2 and len(key) >= 3:
-                    self.do_update(data[0] + ' ' + key[0][1:-2] + ' '
-                                   + key[1][1:-2] +' ' +key[2][:-1])
+                    self.do_update(data[0] + ' ' + key[0][1:-2] + ' ' +
+                                   key[1][1:-2] + ' ' + key[2][:-1])
                 else:
                     print("** no instance found **")
         else:
@@ -60,7 +60,7 @@ class HBNBCommand(cmd.Cmd):
         if not args:
             print('** class name missing **')
         else:
-            m =[]
+            m = []
             objects = models.storage.all()
             data = args.split()
             if not data[0]:
