@@ -60,6 +60,8 @@ class HBNBCommand(cmd.Cmd):
                         elif len(b) == 2:
                             self.do_update(data[0] + ' ' + key[0][1:-2] + ' ' +
                                            b[0] + ' ' + '"' + str(c[0]) + '"')
+                            self.do_update(data[0] + ' ' + key[0][1:-2] + ' ' +
+                                           b[1] + ' ' + '"' + str(c[1]) + '"')
                     except Exception:
                         print(Exception.Exception)
                 elif len(aux) >= 2 and len(key) == 3:
