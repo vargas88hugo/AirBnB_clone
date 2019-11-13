@@ -13,7 +13,7 @@ from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
 
 
-class Test_Base(unittest.TestCase):
+class BaseModelTest(unittest.TestCase):
     """ Test for BaseModel Class """
 
     def setUp(self):
